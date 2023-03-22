@@ -8,11 +8,12 @@
 // for comparisons
 #define SUCCESS 1
 #define FAILURE 0
+#define DELTA 1e-7
 
 typedef struct matrix_struct {
-    double** matrix;
-    int rows;
-    int columns;
+  double **matrix;
+  int rows;
+  int columns;
 } matrix_t;
 
 int s21_create_matrix(int rows, int columns, matrix_t *result);
@@ -27,6 +28,8 @@ int s21_calc_complements(matrix_t *A, matrix_t *result);
 int s21_determinant(matrix_t *A, double *result);
 int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 
+void minus_row_col(const matrix_t *origin_matrix, matrix_t *temp_matrix,
+                   int row, int col);
+double recursive_det(const matrix_t *origin_matrix);
 
-
-#endif //C6_S21_MATRIX_1_S21_MATRIX_H
+#endif  // C6_S21_MATRIX_1_S21_MATRIX_H
