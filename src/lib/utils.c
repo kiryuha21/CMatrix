@@ -33,8 +33,9 @@ double recursive_det(const matrix_t *origin_matrix) {
                    origin_matrix->matrix[1][0] * origin_matrix->matrix[0][1];
       } else {
         matrix_t *temp_matrix = NULL;
-        if (s21_create_matrix(origin_matrix->rows - 1,
-                              origin_matrix->columns - 1, temp_matrix) == OK) {
+        s21_create_matrix(origin_matrix->rows - 1, origin_matrix->columns - 1,
+                          temp_matrix);
+        if (temp_matrix != NULL) {
           int sign = 1;
 
           for (int i = 0; i < origin_matrix->rows; ++i) {

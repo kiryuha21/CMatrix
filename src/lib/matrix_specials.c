@@ -14,8 +14,8 @@ int s21_transpose(matrix_t *A, matrix_t *result) {
     return ERR;
   }
 
-  for (size_t i = 0; i < A->columns; ++i) {
-    for (size_t j = 0; j < A->rows; ++j) {
+  for (int i = 0; i < A->columns; ++i) {
+    for (int j = 0; j < A->rows; ++j) {
       result->matrix[i][j] = A->matrix[j][i];
     }
   }
@@ -45,7 +45,8 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
   }
 
   matrix_t *temp_matrix = NULL;
-  if (s21_create_matrix(A->rows, A->columns, temp_matrix) != OK) {
+  s21_create_matrix(A->rows, A->columns, temp_matrix);
+  if (temp_matrix == NULL) {
     return ERR;
   }
 
@@ -53,8 +54,9 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
   for (int i = 0; i < temp_matrix->rows; ++i) {
     for (int j = 0; j < temp_matrix->columns; ++j) {
       matrix_t *additions_matrix = NULL;
-      if (s21_create_matrix(temp_matrix->rows - 1, temp_matrix->columns - 1,
-                            additions_matrix) != OK) {
+      s21_create_matrix(temp_matrix->rows - 1, temp_matrix->columns - 1,
+                        additions_matrix);
+      if (additions_matrix == NULL) {
         return ERR;
       }
       minus_row_col(A, additions_matrix, j, i);
@@ -85,15 +87,14 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
   }
 
   if (A->columns == 1) {
-    matrix_t *temp_matrix = NULL;
-    if (s21_create_matrix(1, 1, temp_matrix) != OK) {
+    s21_create_matrix(1, 1, result);
+    if (result == NULL) {
       return ERR;
     }
     if (A->matrix[0][0] == 0) {
       return ERR;
     }
-    temp_matrix->matrix[0][0] = 1 / A->matrix[0][0];
-    result = temp_matrix;
+    result->matrix[0][0] = 1 / A->matrix[0][0];
   } else {
     matrix_t *adj_temp = NULL;
     int complements_return = s21_calc_complements(A, adj_temp);
@@ -101,8 +102,7 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
       return complements_return;
     }
 
-    matrix_t *temp_matrix = NULL;
-    int mult_return = s21_mult_number(adj_temp, (1.0 / temp_det), temp_matrix);
+    int mult_return = s21_mult_number(adj_temp, (1.0 / temp_det), result);
     if (mult_return != OK) {
       s21_remove_matrix(adj_temp);
       return ERR;
