@@ -12,7 +12,6 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
 
   result->matrix = (double **)calloc(rows, sizeof(double *));
   if (result->matrix == NULL) {
-    free(result);
     return ERR;
   }
 
@@ -23,7 +22,6 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
         free(result->matrix[j]);
       }
       free(result->matrix);
-      free(result);
       return ERR;
     }
   }
