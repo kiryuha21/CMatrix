@@ -3,7 +3,8 @@
 #include "../s21_matrix.h"
 
 int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
-  if (A == NULL || B == NULL || result == NULL) {
+  if (A == NULL || B == NULL || result == NULL || A->matrix == NULL ||
+      B->matrix == NULL) {
     return ERR;
   }
 
@@ -11,8 +12,7 @@ int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
     return CALC_ERR;
   }
 
-  s21_create_matrix(A->rows, A->columns, result);
-  if (result == NULL) {
+  if (s21_create_matrix(A->rows, A->columns, result) != OK) {
     return ERR;
   }
 
@@ -25,7 +25,8 @@ int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
 }
 
 int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
-  if (A == NULL || B == NULL || result == NULL) {
+  if (A == NULL || B == NULL || result == NULL || A->matrix == NULL ||
+      B->matrix == NULL) {
     return ERR;
   }
 
@@ -33,8 +34,7 @@ int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
     return CALC_ERR;
   }
 
-  s21_create_matrix(A->rows, A->columns, result);
-  if (result == NULL) {
+  if (s21_create_matrix(A->rows, A->columns, result) != OK) {
     return ERR;
   }
 
@@ -47,12 +47,11 @@ int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
 }
 
 int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
-  if (A == NULL || result == NULL) {
+  if (A == NULL || result == NULL || A->matrix == NULL) {
     return ERR;
   }
 
-  s21_create_matrix(A->rows, A->columns, result);
-  if (result == NULL) {
+  if (s21_create_matrix(A->rows, A->columns, result) != OK) {
     return ERR;
   }
 
@@ -65,7 +64,8 @@ int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
 }
 
 int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
-  if (A == NULL || B == NULL || result == NULL) {
+  if (A == NULL || B == NULL || result == NULL || A->matrix == NULL ||
+      B->matrix == NULL) {
     return ERR;
   }
 
@@ -73,8 +73,7 @@ int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
     return CALC_ERR;
   }
 
-  s21_create_matrix(A->rows, B->columns, result);
-  if (result == NULL) {
+  if (s21_create_matrix(A->rows, B->columns, result) != OK) {
     return ERR;
   }
 

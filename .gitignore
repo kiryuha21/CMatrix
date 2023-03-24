@@ -42,6 +42,7 @@ cmake-build-debug
 *.hex
 src/s21_matrix
 a.out
+src/s21_test
 
 # Debug files
 *.dSYM/

@@ -1,10 +1,12 @@
 #include <math.h>
+#include <stdlib.h>
 
 #include "../s21_matrix.h"
 
 int s21_eq_matrix(matrix_t *A, matrix_t *B) {
   int return_code = SUCCESS;
-  if (A->columns != B->columns || A->rows != B->rows) {
+  if (A->columns != B->columns || A->rows != B->rows || A->matrix == NULL ||
+      B->matrix == NULL) {
     return_code = FAILURE;
   } else {
     int stop = 0;

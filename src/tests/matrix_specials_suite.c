@@ -66,7 +66,7 @@ START_TEST(test_incorrect) {
 }
 END_TEST
 
-START_TEST(test_not_sqare) {
+START_TEST(test_not_square) {
   matrix_t m = {0};
   matrix_t result = {0};
   int codec = s21_create_matrix(3, 4, &m);
@@ -633,7 +633,7 @@ Suite *get_matrix_specials_suite(void) {
 
   TCase *complements_cases = tcase_create("complements_cases");
   tcase_add_test(complements_cases, test_normal);
-  tcase_add_test(complements_cases, test_not_sqare);
+  tcase_add_test(complements_cases, test_not_square);
   tcase_add_test(complements_cases, test_incorrect);
   tcase_add_test(complements_cases, test_one_by_one);
 

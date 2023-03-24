@@ -32,20 +32,21 @@ double recursive_det(const matrix_t *origin_matrix) {
         temp_det = origin_matrix->matrix[0][0] * origin_matrix->matrix[1][1] -
                    origin_matrix->matrix[1][0] * origin_matrix->matrix[0][1];
       } else {
-        matrix_t *temp_matrix = NULL;
-        s21_create_matrix(origin_matrix->rows - 1, origin_matrix->columns - 1,
-                          temp_matrix);
-        if (temp_matrix != NULL) {
+        matrix_t temp_matrix;
+        if (s21_create_matrix(origin_matrix->rows - 1,
+                              origin_matrix->columns - 1, &temp_matrix) == OK) {
           int sign = 1;
 
           for (int i = 0; i < origin_matrix->rows; ++i) {
-            minus_row_col(origin_matrix, temp_matrix, i, 0);
+            minus_row_col(origin_matrix, &temp_matrix, i, 0);
             temp_det = temp_det + sign * origin_matrix->matrix[i][0] *
-                                      recursive_det(temp_matrix);
+                                      recursive_det(&temp_matrix);
             sign = -sign;
           }
 
-          s21_remove_matrix(temp_matrix);
+          s21_remove_matrix(&temp_matrix);
+        } else {
+          return ERR;
         }
       }
     }
