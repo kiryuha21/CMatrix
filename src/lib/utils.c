@@ -53,3 +53,14 @@ double recursive_det(const matrix_t *origin_matrix) {
   }
   return (temp_det);
 }
+
+void remove_nrows_matrix(matrix_t *A, int rows) {
+  if (A != NULL) {
+    for (int i = 0; i < rows; ++i) {
+      free(A->matrix[i]);
+    }
+
+    free(A->matrix);
+    A->matrix = NULL;
+  }
+}

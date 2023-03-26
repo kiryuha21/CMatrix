@@ -31,5 +31,6 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 void minus_row_col(const matrix_t *origin_matrix, matrix_t *temp_matrix,
                    int row, int col);
 double recursive_det(const matrix_t *origin_matrix);
+void remove_nrows_matrix(matrix_t *A, int rows);
 
 #endif  // C6_S21_MATRIX_1_S21_MATRIX_H

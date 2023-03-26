@@ -1,3 +1,5 @@
+#include <limits.h>
+
 #include "unit_tests.h"
 
 START_TEST(s21_create_matrix_01) {
@@ -123,6 +125,15 @@ START_TEST(create_3) {
 }
 END_TEST
 
+START_TEST(create_4) {
+  const int rows = INT_MAX;
+  const int cols = INT_MAX;
+
+  matrix_t m = {0};
+  ck_assert_int_eq(s21_create_matrix(rows, cols, &m), ERR);
+}
+END_TEST
+
 START_TEST(s21_remove_matrix_01) {
   int res = 0;
   matrix_t A = {0};
@@ -204,6 +215,7 @@ Suite *get_allocation_suite() {
   tcase_add_test(create_case, create_1);
   tcase_add_test(create_case, create_2);
   tcase_add_test(create_case, create_3);
+  tcase_add_test(create_case, create_4);
 
   TCase *remove_case = tcase_create("suite_remove_matrix");
   tcase_add_test(remove_case, s21_remove_matrix_01);
